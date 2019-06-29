@@ -1,0 +1,8 @@
+ext {
+    // 海外超盟版本
+    reaperAbroadVersion = '1.4.3'
+    // Mintegral广告
+    reaperMintegralVersion = '9.9.1'
+    // InMobi广告
+    reaperInmobiVersion = '7.2.6'
+}

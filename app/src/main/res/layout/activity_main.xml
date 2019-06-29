@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+
+    <Button android:layout_width="wrap_content"
+            android:id="@+id/start_service_btn"
+            android:text="启动服务"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorAccent"
+            android:layout_height="50dp"
+            tools:ignore="HardcodedText"/>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/start_service_btn"
+            android:id="@+id/start_foreground_service_btn"
+            android:text="启动前台服务"
+            android:textColor="@color/colorAccent"
+            android:layout_height="50dp"
+            tools:ignore="HardcodedText"/>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/start_foreground_service_btn"
+            android:id="@+id/stop_service_btn"
+            android:text="stop服务"
+
+            android:textColor="@color/colorAccent"
+            android:layout_height="50dp"
+            tools:ignore="HardcodedText"/>
+
+</RelativeLayout>

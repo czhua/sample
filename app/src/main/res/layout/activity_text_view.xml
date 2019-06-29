@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical"
+        tools:context=".TextViewActivity">
+
+    <TextView
+            android:id="@+id/line1_tv"
+            android:layout_width="match_parent"
+            android:text="hello"
+            android:maxLines="1"
+            android:textColor="@color/colorAccent"
+            android:textSize="10dp"
+            android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/line2_tv"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:layout_below="@id/line1_tv"
+            android:text="hello"
+            android:textColor="@color/colorAccent"
+            android:ellipsize="end"
+            android:textSize="10dp"
+            android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/tag_tv"
+              android:text="按钮"
+              android:layout_alignBaseline="@id/line2_tv"
+              android:layout_toEndOf="@id/line2_tv"
+              android:textSize="10dp"
+              android:padding="0dp"
+              android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/line3_tv"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="3"
+            android:layout_below="@id/line2_tv"
+            android:text="hello"
+            android:textColor="@color/colorAccent"
+            android:ellipsize="end"
+            android:textSize="10dp"
+            android:layout_height="wrap_content"/>
+
+    <com.chan.myapplication.widget.TagTextView
+            android:layout_width="match_parent"
+            android:id="@+id/tag_text_view"
+            android:layout_below="@id/line3_tv"
+            android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

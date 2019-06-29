@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav"
+            app:startDestination="@+id/navFragment">
+    <fragment android:id="@+id/navFragment" android:name="com.chan.myapplication.nav.NavFragment"
+              android:label="fragment_nav" tools:layout="@layout/fragment_nav">
+        <action android:id="@+id/action_navFragment_to_navSecondFragment" app:destination="@id/navSecondFragment"
+                app:enterAnim="@anim/slide_in_right"/>
+        <action android:id="@+id/action_navFragment_to_navSecondActivity" app:destination="@id/navSecondActivity"/>
+    </fragment>
+    <activity android:id="@+id/navSecondActivity" android:name="com.chan.myapplication.nav.NavSecondActivity"
+              android:label="activity_nav_second" tools:layout="@layout/activity_nav_second"/>
+    <fragment android:id="@+id/navSecondFragment" android:name="com.chan.myapplication.nav.NavSecondFragment"
+              android:label="fragment_nav_second" tools:layout="@layout/fragment_nav_second"/>
+</navigation>
