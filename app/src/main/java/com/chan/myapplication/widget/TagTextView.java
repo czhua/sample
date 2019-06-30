@@ -89,6 +89,7 @@ public class TagTextView extends RelativeLayout {
         Log.d(TAG, "width:" + width + ", tag width:" + tagWidth);
         String[] arr = text.split("");
         StringBuilder buffer = new StringBuilder();
+        label:
         for (int i = 0; i < arr.length; i++) {
             buffer.append(arr[i]);
             float textWidth = mFirstTv.getPaint().measureText(buffer.toString());
@@ -102,8 +103,10 @@ public class TagTextView extends RelativeLayout {
                     if (Character.isLowerCase(end) || Character.isUpperCase(end)) {
                         endBuffer.append(end);
                     } else {
+                        Log.d(TAG, "length: " + buffer.length() + " end len:" + endBuffer.length());
+                        Log.d(TAG, "buffer:" + buffer + ", end:" + endBuffer);
                         buffer.delete(buffer.length() - endBuffer.length(), buffer.length());
-                        break;
+                        break label;
                     }
                 }
             }
@@ -123,6 +126,7 @@ public class TagTextView extends RelativeLayout {
             mEndTv.setMaxWidth((int) maxWidth);
             LayoutParams lp = (LayoutParams) mTagTv.getLayoutParams();
             lp.addRule(ALIGN_BASELINE, ID_END);
+            lp.addRule(END_OF, ID_END);
             mTagTv.setLayoutParams(lp);
         }
     }
@@ -169,7 +173,7 @@ public class TagTextView extends RelativeLayout {
         LayoutParams tagLp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 //        tagLp.addRule(BELOW, ID_FIRST);
         tagLp.addRule(ALIGN_BASELINE, ID_FIRST);
-        tagLp.addRule(ALIGN_END, ID_FIRST);
+        tagLp.addRule(END_OF, ID_FIRST);
         view.setLayoutParams(tagLp);
         return view;
     }
