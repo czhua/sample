@@ -69,6 +69,8 @@ public class TagTextView extends RelativeLayout {
     private String mText;
     private String mTagText;
     private GradientDrawable mTagBgDrawable;
+    private int mMaxLines = Integer.MAX_VALUE;
+    private boolean mSingleLineMode = false;
 
     public TagTextView(Context context) {
         this(context, null);
@@ -83,10 +85,29 @@ public class TagTextView extends RelativeLayout {
         init(context);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        updateView();
+    }
+
     public void setText(final String text, final String tag) {
         mText = text;
         mTagText = tag;
+        if (TextUtils.isEmpty(tag)) {
+            mTagTv.setVisibility(View.GONE);
+            return;
+        }
         mTagTv.setText(tag);
+    }
+
+    public void setSingleLine() {
+        setSingleLine(true);
+    }
+
+    public void setSingleLine(boolean singleLine) {
+        mSingleLineMode = singleLine;
+        requestLayout();
     }
 
     /**
@@ -125,7 +146,7 @@ public class TagTextView extends RelativeLayout {
         String[] arr = mText.split("");
         StringBuilder buffer = new StringBuilder();
         float firstWidth = 0;
-        if (arr.length > DEFAULT_START_POSITION) {
+        if (!mSingleLineMode && arr.length > DEFAULT_START_POSITION) {
             buffer.append(mText.substring(0, DEFAULT_START_POSITION - 1));
             label:
             for (int i = DEFAULT_START_POSITION; i < arr.length; i++) {
@@ -162,11 +183,17 @@ public class TagTextView extends RelativeLayout {
 
         Log.d(TAG, "end buffer:" + buffer);
         float maxWidth = width - tagWidth - DensityUtil.dip2px(getContext(), DEFAULT_TAG_MARGIN_LEFT);
-        if (firstWidth <= maxWidth) {
+        if (mSingleLineMode) {
+            mFirstTv.setMaxWidth((int) maxWidth);
+            mFirstTv.setText(mText);
+            mEndTv.setVisibility(View.GONE);
+        } else if (firstWidth <= maxWidth) {
             Log.d(TAG, "single line first width:" + firstWidth + ", max width:" + maxWidth);
+            mFirstTv.setMaxWidth(width);
             mFirstTv.setText(buffer);
             mEndTv.setVisibility(View.GONE);
         } else {
+            mFirstTv.setMaxWidth(width);
             mFirstTv.setText(buffer);
             mEndTv.setVisibility(View.VISIBLE);
             String endText = mText.substring(buffer.length()).trim();
@@ -199,13 +226,13 @@ public class TagTextView extends RelativeLayout {
         addView(mEndTv);
         addView(mTagTv);
 
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+      /*  getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 updateView();
             }
-        });
+        });*/
     }
 
     private TextView initFirstView(Context ctx) {
